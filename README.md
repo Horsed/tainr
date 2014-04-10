@@ -81,7 +81,7 @@ In this example [express](http://expressjs.com) app, we're connection the socket
 </script>
 ```
 
-This example socket.io frontend will alert you whenever the heartbeat event occours. While that is less useful, it shows you, how to connect ```tainr``` monitoring handlers to a frontend. Let's just start all the services and apps for the sake of completeness:
+This example socket.io frontend will alert you whenever the heartbeat event occours. While that is less useful, it shows you, how to write ```tainr``` monitoring handlers for a frontend. Let's just start all the services and apps for the sake of completeness:
 
     $ tainr start
     tainr is running...
