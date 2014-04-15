@@ -103,7 +103,7 @@ The configuration of ```tainr``` is done via a ```tainrfile.js``` file that is e
 
     $ tainr start -c /path/to/somefile.js
 
-See the following example tainerfile.js to get to know the config options:
+See the following example tainrfile.js to get to know the config options:
 
 > tainrfile.js
 
