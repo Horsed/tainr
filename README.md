@@ -3,7 +3,7 @@ tainr
 
 sketching an event-based hackable monitoring for Node.js apps
 
-```tainr``` is ought to be a monitoring service that aims for high customizability. You can write your own monitoring indicators and handlers which are basically just Node.js modules that use the same interprocess ```EventEmitter```. Indicators are those parts that test/monitor something and send monitoring events. Handlers will listen for those events and send emails or log something or do whatever you want. ```tainr``` will provide a [socket.io](http://socket.io) integration so you can even write handlers that do something in **your frontend**.
+```tainr``` is ought to be a monitoring service that aims for high customizability. It will enable you to monitor anything from process metrics to business events. You can write your own monitoring indicators and handlers which are basically just Node.js modules that use the same interprocess ```EventEmitter```. Indicators are those parts that test/monitor something and send monitoring events. Handlers will listen for those events and send emails or log something or do whatever you want. ```tainr``` will provide a [socket.io](http://socket.io) integration so you can even write handlers that do something **in your frontend**. The underlying messaging is based on [zeromq](http://zeromq.org) so you can connect ```tainr``` to your existing zeromq based pub/sub infrastructure. This makes it easy to monitor all events going through your app. You can also let ```tainr``` use its own pub/sub infrastructure.
 
 # Example
 
@@ -96,3 +96,46 @@ This example socket.io frontend will alert you whenever the heartbeat event occo
     my-status-page is running on port 3000...
 
 Note that ```my-heartbeat-handler``` doesn't have to be started manually. You can also configure ```tainr``` to start your handlers automatically when ```tainr``` starts.
+
+# Configuration
+
+The configuration of ```tainr``` is done via a ```tainrfile.js``` file that is expected to be located in the current working directory if none is provided via the CLI. To explicitly provide a config file use the ```-c``` option:
+
+    $ tainr -c /path/to/somefile.js
+
+See the following example tainerfile.js to get to know the config optione:
+
+```js
+module.exports = {
+
+  // the zeromq xpub/xsub broker that tainr will use
+  broker: {
+    xpub: 'tcp://127.0.0.1:3333',
+    xsub: 'tcp://127.0.0.1:3338', // default = xpub port + 1 (e.g. tcp://127.0.0.1:3334)
+    tainr: true,                  // whether tainr starts the broker or tainr will just connect to an existing broker
+  },
+  
+  // the indicators that tainr will start (you could also start and connect some the broker yourself)
+  indicators: [
+    {
+      // provide one of the following options:
+
+      included: 'heartbeat',                  // use one of the indicators that tainr brings
+      local: '/path/to/my-indicator-bin.js',  // use a local custom indicator
+      npm: 'my-indicator',                    // use a custom indicator fetched via npm
+    }
+  ],
+
+  // the handlers that tainr will start (you could also start and connect some the broker yourself)
+  handlers: [
+    {
+      // provide one of the following options:
+
+      included: 'heartbeat',                // use one of the handlers that tainr brings
+      local: '/path/to/my-handler-bin.js',  // use a local custom handler
+      npm: 'my-handler',                    // use a custom indicator fetched via npm
+    }
+  ],
+
+};
+```
