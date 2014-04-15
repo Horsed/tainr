@@ -41,7 +41,7 @@ tainr.on('heartbeat', function(serviceId) {
 console.log('my-heartbeat-handler is running...');
 ```
 
-As you can see, ```tainr``` exposes the ```EventEmitter``` API and is used to listen for ```heartbeat``` events that will be emitted by ```my-node-app.js```. Next we'll see how to connect the monitoring event system to the [socket.io](http://socket.io) backend of a simple status page:
+As you can see, ```tainr``` is a Node.js [```EventEmitter```](http://nodejs.org/api/events.html#events_class_events_eventemitter) and is used to listen for ```heartbeat``` events that will be emitted by ```my-node-app.js```. Next we'll see how to connect the monitoring event system to the [socket.io](http://socket.io) backend of a simple status page:
 
 > my-status-page.js
 
@@ -67,7 +67,7 @@ io.sockets.on('connection', function (socket) {
 });
 ```
 
-In this example [express](http://expressjs.com) app, we're connection the socket.io socket to the ```tainr``` ```EventEmitter```. That means, all monitoring events emitted through ```tainr``` will be automagically emitted with this socket.io socket. Now we can write a monitoring handler for the browser:
+In this example [express](http://expressjs.com) app, we're connecting the socket.io socket to the ```tainr``` ```EventEmitter```. That means, all monitoring events emitted through ```tainr``` will be automagically emitted with this socket.io socket. Now we can write a monitoring handler for the browser:
 
 > my-status-page-frontend.html
 
