@@ -114,7 +114,8 @@ module.exports = {
   broker: {
     xpub: 'tcp://127.0.0.1:3333',
     xsub: 'tcp://127.0.0.1:3338', // default = xpub port + 1 (e.g. tcp://127.0.0.1:3334)
-    tainr: true,                  // whether tainr starts the broker or tainr will just connect to an existing broker
+    tainr: true,                  // true: tainr starts the broker
+                                  // false: tainr will connect to an existing broker
   },
   
   // the indicators that tainr will start (you could also start and connect some the broker yourself)
