@@ -142,3 +142,7 @@ module.exports = {
 
 };
 ```
+
+## How indicators and handlers are started
+
+As you saw in the example config file, ```tainr``` can start indicators and handlers for you...
