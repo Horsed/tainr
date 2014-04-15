@@ -101,7 +101,7 @@ Note that ```my-heartbeat-handler``` doesn't have to be started manually. You ca
 
 The configuration of ```tainr``` is done via a ```tainrfile.js``` file that is expected to be located in the current working directory if none is provided via the CLI. To explicitly provide a config file use the ```-c``` option:
 
-    $ tainr -c /path/to/somefile.js
+    $ tainr start -c /path/to/somefile.js
 
 See the following example tainerfile.js to get to know the config options:
 
