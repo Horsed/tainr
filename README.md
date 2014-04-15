@@ -105,6 +105,8 @@ The configuration of ```tainr``` is done via a ```tainrfile.js``` file that is e
 
 See the following example tainerfile.js to get to know the config options:
 
+> tainrfile.js
+
 ```js
 module.exports = {
 
