@@ -36,7 +36,7 @@
     </head>
     <body>
         
-    <div class="book" data-github="Horsed/tainr" data-level="2" data-basepath=".." data-revision="1397649666303">
+    <div class="book" data-github="Horsed/tainr" data-level="2" data-basepath=".." data-revision="1397649974963">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -173,6 +173,8 @@
       included: <span class="hljs-string">'heartbeat'</span>,                  <span class="hljs-comment">// default indicator</span>
       local: <span class="hljs-string">'/path/to/my-indicator-bin.js'</span>,  <span class="hljs-comment">// local custom indicator</span>
       npm: <span class="hljs-string">'my-indicator'</span>,                    <span class="hljs-comment">// custom indicator fetched via npm</span>
+      child: <span class="hljs-literal">true</span>,                            <span class="hljs-comment">// true: spawn als child process</span>
+                                              <span class="hljs-comment">// false: require() and instantiate</span>
     }
   ],
 
@@ -183,7 +185,7 @@
 
       included: <span class="hljs-string">'heartbeat'</span>,                <span class="hljs-comment">// default handler</span>
       local: <span class="hljs-string">'/path/to/my-handler-bin.js'</span>,  <span class="hljs-comment">// local custom handler</span>
-      npm: <span class="hljs-string">'my-handler'</span>,                    <span class="hljs-comment">// custom indicator fetched via npm</span>
+      npm: <span class="hljs-string">'my-handler'</span>,                    <span class="hljs-comment">// custom handler fetched via npm</span>
       child: <span class="hljs-literal">true</span>,                          <span class="hljs-comment">// true: spawn als child process</span>
                                             <span class="hljs-comment">// false: require() and instantiate</span>
     }
