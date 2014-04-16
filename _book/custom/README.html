@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
+        
+        <meta charset="UTF-8">
+        <title>Custom Indicators and Handlers | tainr</title>
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="Horsed">
+        <meta name="description" content="sketching an event-based hackable monitoring for Node.js apps">
+        <meta name="keywords" content="gitbook,github" >
+        <meta name="generator" content="www.gitbook.io">
+
+        
+        
+        <link rel="prev" href="../configuration/README.html" />
+        
+
+        <meta property="og:title" content="Custom Indicators and Handlers | tainr">
+        <meta property="og:site_name" content="tainr">
+        <meta property="og:type" content="book">
+        <meta property="og:locale" content="en_US">
+
+        <meta property="book:author" content="https://github.com/Horsed">
+        <meta property="book:tag" content="GitBook">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="shortcut icon" href="..\gitbook/images/favicon.ico" type="image/x-icon">
+        
+    </head>
+    <body>
+        
+    <div class="book" data-github="Horsed/tainr" data-level="3" data-basepath=".." data-revision="1397649666303">
+    <div class="book-header">
+    <!-- Actions Left -->
+    
+    <a href="https://github.com/Horsed/tainr" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    
+    <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
+
+    <!-- Actions Right -->
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="google-plus"><i class="fa fa-google-plus"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="facebook"><i class="fa fa-facebook"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
+
+    
+    <a href="https://github.com/Horsed/tainr/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/Horsed/tainr/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    
+
+    <!-- Title -->
+    <h1><a href="../" >tainr</a></h1>
+</div>
+
+    <div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        <li>
+            <a href="https://github.com/Horsed" target="blank">About the author</a>
+        </li>
+        <li>
+            <a href="https://github.com/Horsed/tainr/issues" target="blank">Questions and Issues</a>
+        </li>
+        <li>
+            <a href="https://github.com/Horsed/tainr/edit/master/custom/README.md" target="blank">Edit and Contribute</a>
+        </li>
+        <li class="divider"></li>
+        
+        <li data-level="0" data-path="index.html">
+            <a href="../"><i class="fa fa-check"></i> Introduction</a>
+        </li>
+        
+            <li  data-level="1" data-path="introduction/README.html">
+                
+                <a href="../introduction/README.html">
+                    <i class="fa fa-check"></i> <b>1.</b> Introduction
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="1.1" data-path="introduction/example.html">
+                            
+                            <a href="../introduction/example.html">
+                                <i class="fa fa-check"></i> <b>1.1.</b> Example
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="2" data-path="configuration/README.html">
+                
+                <a href="../configuration/README.html">
+                    <i class="fa fa-check"></i> <b>2.</b> Configuration
+                </a>
+                
+                
+            </li>
+        
+            <li  data-level="3" data-path="custom/README.html">
+                
+                <a href="../custom/README.html">
+                    <i class="fa fa-check"></i> <b>3.</b> Custom Indicators and Handlers
+                </a>
+                
+                
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="page-wrapper" tabindex="-1">
+                <div class="book-progress">
+    <div class="bar">
+        <div class="inner" style="width: 100%;min-width: 75%;"></div>
+    </div>
+    <div class="chapters">
+    
+        <a href="../index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
+    
+        <a href="../introduction/README.html" title="Introduction" class="chapter done new-chapter" data-progress="1" style="left: 25%;"></a>
+    
+        <a href="../introduction/example.html" title="Example" class="chapter done " data-progress="1.1" style="left: 50%;"></a>
+    
+        <a href="../configuration/README.html" title="Configuration" class="chapter done new-chapter" data-progress="2" style="left: 75%;"></a>
+    
+        <a href="../custom/README.html" title="Custom Indicators and Handlers" class="chapter done new-chapter" data-progress="3" style="left: 100%;"></a>
+    
+    </div>
+</div>
+
+                <div class="page-inner">
+                
+                    <section class="normal" id="section-gitbook_3">
+                    
+                        <h1 id="custom-indicators-and-handlers">Custom indicators and handlers</h1>
+<p>bla</p>
+<h2 id="starting-indicators-and-handlers">Starting indicators and handlers</h2>
+<p>As you saw in the example config file, tainr can start indicators and handlers for you. They can either be spawned as child processes or by <code>require()</code>ing and instantiating them. In order to instantiate handlers and indicators they have to expose their functionality like this:</p>
+<pre><code class="lang-js">module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyIndicator</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-comment">// indicator stuff</span>
+};
+</code></pre>
+<p>Local custom indicators and handlers will be instantiated like this: <code>require(config.indicators[0].local)</code></p>
+<h2 id="connecting-custom-indicators-and-handlers-to-the-tainr-pub-sub-broker">Connecting custom indicators and handlers to the tainr pub/sub broker</h2>
+<p>Here is a custom indicator stub:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
+  , Indicator = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Indicator;
+
+util.inherits(MyIndicator, Indicator);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyIndicator</span><span class="hljs-params">()</span> {</span>
+
+  setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span><span class="hljs-params">()</span> {</span>
+
+
+
+  }, <span class="hljs-number">60000</span>);
+
+};
+
+module.exports = MyIndicator;
+</code></pre>
+<p>And a custom handler stub:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
+  , Handler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Handler;
+
+util.inherits(MyHandler, Handler);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyHandler</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-comment">// handler stuff</span>
+};
+
+module.exports = MyHandler;
+</code></pre>
+<p><code>Indicator</code> and <code>Handler</code> will connect your custom indicator and handler to the tainr pub/sub broker.</p>
+
+                    
+                    </section>
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../configuration/README.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        
+        
+    </div>
+</div>
+
+        
+        <link rel="stylesheet" href="..\gitbook/style.css">
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js"></script>
+        <script src="..\gitbook/jsrepl/jsrepl.js" id="jsrepl-script"></script>
+        <script src="..\gitbook/app.js"></script>
+        
+    </body>
+</html>
