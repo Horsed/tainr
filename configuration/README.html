@@ -3,26 +3,28 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>Custom Indicators and Handlers | tainr</title>
+        <title>Configuration | tainr</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
-        <meta name="author" content="Horsed">
+        <meta name="author" content="GitbookIO">
         <meta name="description" content="sketching an event-based hackable monitoring for Node.js apps">
         <meta name="keywords" content="gitbook,github" >
         <meta name="generator" content="www.gitbook.io">
 
         
+        <link rel="next" href="../custom/README.html" />
         
-        <link rel="prev" href="../configuration/README.html" />
+        
+        <link rel="prev" href="../introduction/example.html" />
         
 
-        <meta property="og:title" content="Custom Indicators and Handlers | tainr">
+        <meta property="og:title" content="Configuration | tainr">
         <meta property="og:site_name" content="tainr">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
 
-        <meta property="book:author" content="https://github.com/Horsed">
+        <meta property="book:author" content="https://github.com/GitbookIO">
         <meta property="book:tag" content="GitBook">
 
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -34,11 +36,11 @@
     </head>
     <body>
         
-    <div class="book" data-github="Horsed/tainr" data-level="3" data-basepath=".." data-revision="1397649666303">
+    <div class="book" data-github="GitbookIO/javascript" data-level="2" data-basepath=".." data-revision="1397650343186">
     <div class="book-header">
     <!-- Actions Left -->
     
-    <a href="https://github.com/Horsed/tainr" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    <a href="https://github.com/GitbookIO/javascript" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
     
     <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
     <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
@@ -49,8 +51,8 @@
     <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
 
     
-    <a href="https://github.com/Horsed/tainr/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
-    <a href="https://github.com/Horsed/tainr/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    <a href="https://github.com/GitbookIO/javascript/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/GitbookIO/javascript/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
     
 
     <!-- Title -->
@@ -64,13 +66,13 @@
     <ul class="summary">
         
         <li>
-            <a href="https://github.com/Horsed" target="blank">About the author</a>
+            <a href="https://github.com/GitbookIO" target="blank">About the author</a>
         </li>
         <li>
-            <a href="https://github.com/Horsed/tainr/issues" target="blank">Questions and Issues</a>
+            <a href="https://github.com/GitbookIO/javascript/issues" target="blank">Questions and Issues</a>
         </li>
         <li>
-            <a href="https://github.com/Horsed/tainr/edit/master/custom/README.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/GitbookIO/javascript/edit/master/configuration/README.md" target="blank">Edit and Contribute</a>
         </li>
         <li class="divider"></li>
         
@@ -125,7 +127,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 100%;min-width: 75%;"></div>
+        <div class="inner" style="width: 75%;min-width: 50%;"></div>
     </div>
     <div class="chapters">
     
@@ -137,56 +139,60 @@
     
         <a href="../configuration/README.html" title="Configuration" class="chapter done new-chapter" data-progress="2" style="left: 75%;"></a>
     
-        <a href="../custom/README.html" title="Custom Indicators and Handlers" class="chapter done new-chapter" data-progress="3" style="left: 100%;"></a>
+        <a href="../custom/README.html" title="Custom Indicators and Handlers" class="chapter  new-chapter" data-progress="3" style="left: 100%;"></a>
     
     </div>
 </div>
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_2">
                     
-                        <h1 id="custom-indicators-and-handlers">Custom indicators and handlers</h1>
-<p>bla</p>
-<h2 id="starting-indicators-and-handlers">Starting indicators and handlers</h2>
-<p>As you saw in the example config file, tainr can start indicators and handlers for you. They can either be spawned as child processes or by <code>require()</code>ing and instantiating them. In order to instantiate handlers and indicators they have to expose their functionality like this:</p>
-<pre><code class="lang-js">module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyIndicator</span><span class="hljs-params">()</span> {</span>
-  <span class="hljs-comment">// indicator stuff</span>
+                        <h1 id="configuration">Configuration</h1>
+<p>The configuration of tainr is done via a <code>tainrfile.js</code> file that is expected to be located in the current working directory if none is provided via the CLI. To explicitly provide a config file use the <code>-c</code> option:</p>
+<pre><code>$ tainr <span class="hljs-operator"><span class="hljs-keyword">start</span> -c /path/<span class="hljs-keyword">to</span>/somefile.js</span>
+</code></pre><p>See the following example tainrfile.js to get to know the config options:</p>
+<blockquote>
+<p>tainrfile.js</p>
+</blockquote>
+<pre><code class="lang-js">module.exports = {
+
+  <span class="hljs-comment">// the zeromq xpub/xsub broker that tainr will use</span>
+  broker: {
+    xpub: <span class="hljs-string">'tcp://127.0.0.1:3333'</span>,
+    xsub: <span class="hljs-string">'tcp://127.0.0.1:3338'</span>, <span class="hljs-comment">// default: xpub port + 1</span>
+    tainr: <span class="hljs-literal">true</span>,                  <span class="hljs-comment">// true: tainr starts the broker itself</span>
+                                  <span class="hljs-comment">// false: tainr will connect to a broker</span>
+  },
+
+  <span class="hljs-comment">// the indicators that tainr will start</span>
+  indicators: [
+    {
+      <span class="hljs-comment">// provide one of the following options:</span>
+
+      included: <span class="hljs-string">'heartbeat'</span>,                  <span class="hljs-comment">// default indicator</span>
+      local: <span class="hljs-string">'/path/to/my-indicator-bin.js'</span>,  <span class="hljs-comment">// local custom indicator</span>
+      npm: <span class="hljs-string">'my-indicator'</span>,                    <span class="hljs-comment">// custom indicator fetched via npm</span>
+      child: <span class="hljs-literal">true</span>,                            <span class="hljs-comment">// true: spawn als child process</span>
+                                              <span class="hljs-comment">// false: require() and instantiate</span>
+    }
+  ],
+
+  <span class="hljs-comment">// the handlers that tainr will start</span>
+  handlers: [
+    {
+      <span class="hljs-comment">// provide one of the following options:</span>
+
+      included: <span class="hljs-string">'heartbeat'</span>,                <span class="hljs-comment">// default handler</span>
+      local: <span class="hljs-string">'/path/to/my-handler-bin.js'</span>,  <span class="hljs-comment">// local custom handler</span>
+      npm: <span class="hljs-string">'my-handler'</span>,                    <span class="hljs-comment">// custom handler fetched via npm</span>
+      child: <span class="hljs-literal">true</span>,                          <span class="hljs-comment">// true: spawn als child process</span>
+                                            <span class="hljs-comment">// false: require() and instantiate</span>
+    }
+  ],
+
 };
 </code></pre>
-<p>Local custom indicators and handlers will be instantiated like this: <code>require(config.indicators[0].local)</code></p>
-<h2 id="connecting-custom-indicators-and-handlers-to-the-tainr-pub-sub-broker">Connecting custom indicators and handlers to the tainr pub/sub broker</h2>
-<p>Here is a custom indicator stub:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
-  , Indicator = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Indicator;
-
-util.inherits(MyIndicator, Indicator);
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyIndicator</span><span class="hljs-params">()</span> {</span>
-
-  setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span><span class="hljs-params">()</span> {</span>
-
-
-
-  }, <span class="hljs-number">60000</span>);
-
-};
-
-module.exports = MyIndicator;
-</code></pre>
-<p>And a custom handler stub:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
-  , Handler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Handler;
-
-util.inherits(MyHandler, Handler);
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyHandler</span><span class="hljs-params">()</span> {</span>
-  <span class="hljs-comment">// handler stuff</span>
-};
-
-module.exports = MyHandler;
-</code></pre>
-<p><code>Indicator</code> and <code>Handler</code> will connect your custom indicator and handler to the tainr pub/sub broker.</p>
 
                     
                     </section>
@@ -196,8 +202,10 @@ module.exports = MyHandler;
         </div>
 
         
-        <a href="../configuration/README.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        <a href="../introduction/example.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
+        
+        <a href="../custom/README.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
