@@ -3,7 +3,7 @@
     <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
         
         <meta charset="UTF-8">
-        <title>Introduction | tainr</title>
+        <title>Custom Indicators and Handlers | tainr</title>
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
@@ -13,11 +13,11 @@
         <meta name="generator" content="www.gitbook.io">
 
         
-        <link rel="next" href="./introduction/example.html" />
         
+        <link rel="prev" href="../configuration/README.html" />
         
 
-        <meta property="og:title" content="Introduction | tainr">
+        <meta property="og:title" content="Custom Indicators and Handlers | tainr">
         <meta property="og:site_name" content="tainr">
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
@@ -29,12 +29,12 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="..\gitbook/images/favicon.ico" type="image/x-icon">
         
     </head>
     <body>
         
-    <div class="book" data-github="GitbookIO/javascript" data-level="0" data-basepath="." data-revision="1397734679652">
+    <div class="book" data-github="GitbookIO/javascript" data-level="3" data-basepath=".." data-revision="1397734679652">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -54,7 +54,7 @@
     
 
     <!-- Title -->
-    <h1><a href="./" >tainr</a></h1>
+    <h1><a href="../" >tainr</a></h1>
 </div>
 
     <div class="book-summary">
@@ -70,17 +70,17 @@
             <a href="https://github.com/GitbookIO/javascript/issues" target="blank">Questions and Issues</a>
         </li>
         <li>
-            <a href="https://github.com/GitbookIO/javascript/edit/master/README.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/GitbookIO/javascript/edit/master/custom/README.md" target="blank">Edit and Contribute</a>
         </li>
         <li class="divider"></li>
         
         <li data-level="0" data-path="index.html">
-            <a href="./"><i class="fa fa-check"></i> Introduction</a>
+            <a href="../"><i class="fa fa-check"></i> Introduction</a>
         </li>
         
             <li  data-level="1" data-path="introduction/example.html">
                 
-                <a href="./introduction/example.html">
+                <a href="../introduction/example.html">
                     <i class="fa fa-check"></i> <b>1.</b> Example
                 </a>
                 
@@ -89,7 +89,7 @@
         
             <li  data-level="2" data-path="configuration/README.html">
                 
-                <a href="./configuration/README.html">
+                <a href="../configuration/README.html">
                     <i class="fa fa-check"></i> <b>2.</b> Configuration
                 </a>
                 
@@ -98,7 +98,7 @@
         
             <li  data-level="3" data-path="custom/README.html">
                 
-                <a href="./custom/README.html">
+                <a href="../custom/README.html">
                     <i class="fa fa-check"></i> <b>3.</b> Custom Indicators and Handlers
                 </a>
                 
@@ -113,27 +113,66 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 0%;min-width: 0%;"></div>
+        <div class="inner" style="width: 100%;min-width: 66.66666666666667%;"></div>
     </div>
     <div class="chapters">
     
-        <a href="./index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
+        <a href="../index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
     
-        <a href="./introduction/example.html" title="Example" class="chapter  new-chapter" data-progress="1" style="left: 33.333333333333336%;"></a>
+        <a href="../introduction/example.html" title="Example" class="chapter done new-chapter" data-progress="1" style="left: 33.333333333333336%;"></a>
     
-        <a href="./configuration/README.html" title="Configuration" class="chapter  new-chapter" data-progress="2" style="left: 66.66666666666667%;"></a>
+        <a href="../configuration/README.html" title="Configuration" class="chapter done new-chapter" data-progress="2" style="left: 66.66666666666667%;"></a>
     
-        <a href="./custom/README.html" title="Custom Indicators and Handlers" class="chapter  new-chapter" data-progress="3" style="left: 100%;"></a>
+        <a href="../custom/README.html" title="Custom Indicators and Handlers" class="chapter done new-chapter" data-progress="3" style="left: 100%;"></a>
     
     </div>
 </div>
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_1">
+                    <section class="normal" id="section-gitbook_2">
                     
-                        <h1 id="tainr">tainr</h1>
-<p><em>tainr</em> is ought to be a monitoring service that aims for high customizability. It will enable you to monitor anything from process metrics to business events. You can write your own monitoring indicators and handlers which are basically just Node.js modules that use the same interprocess <code>EventEmitter</code>. Indicators are those parts that test/monitor something and send monitoring events. Handlers will listen for those events and send emails or log something or do whatever you want. tainr will provide a <a href="http://socket.io/" target="_blank">socket.io</a> integration so you can even write handlers that do something <strong>in your frontend</strong>. The underlying messaging is based on <a href="http://zeromq.org/" target="_blank">zeromq</a> so you can connect tainr to your existing zeromq based pub/sub infrastructure. This makes it easy to monitor all events going through your app. You can also let tainr use its own pub/sub infrastructure.</p>
+                        <h1 id="custom-indicators-and-handlers">Custom indicators and handlers</h1>
+<p>tainr offers three ways to...</p>
+<h2 id="starting-indicators-and-handlers">Starting indicators and handlers</h2>
+<p>As you saw in the example config file, tainr can start indicators and handlers for you. They can either be spawned as child processes or by <code>require()</code>ing and instantiating them. In order to instantiate handlers and indicators they have to expose their functionality like this:</p>
+<pre><code class="lang-js">module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyIndicator</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-comment">// indicator stuff</span>
+};
+</code></pre>
+<p>Local custom indicators and handlers will be instantiated like this: <code>require(config.indicators[0].local)</code></p>
+<h2 id="connecting-custom-indicators-and-handlers-to-the-tainr-pub-sub-broker">Connecting custom indicators and handlers to the tainr pub/sub broker</h2>
+<p>Here is a custom indicator stub:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
+  , Indicator = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Indicator;
+
+util.inherits(MyIndicator, Indicator);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyIndicator</span><span class="hljs-params">()</span> {</span>
+
+  setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span><span class="hljs-params">()</span> {</span>
+
+
+
+  }, <span class="hljs-number">60000</span>);
+
+};
+
+module.exports = MyIndicator;
+</code></pre>
+<p>And a custom handler stub:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
+  , Handler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Handler;
+
+util.inherits(MyHandler, Handler);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyHandler</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-comment">// handler stuff</span>
+};
+
+module.exports = MyHandler;
+</code></pre>
+<p><code>Indicator</code> and <code>Handler</code> will connect your custom indicator and handler to the tainr pub/sub broker.</p>
 
                     
                     </section>
@@ -143,20 +182,20 @@
         </div>
 
         
+        <a href="../configuration/README.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./introduction/example.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
 
         
-        <link rel="stylesheet" href="gitbook/style.css">
+        <link rel="stylesheet" href="..\gitbook/style.css">
         
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js"></script>
-        <script src="gitbook/jsrepl/jsrepl.js" id="jsrepl-script"></script>
-        <script src="gitbook/app.js"></script>
+        <script src="..\gitbook/jsrepl/jsrepl.js" id="jsrepl-script"></script>
+        <script src="..\gitbook/app.js"></script>
         
     </body>
 </html>
