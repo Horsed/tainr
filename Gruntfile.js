@@ -8,13 +8,13 @@ module.exports = function (grunt) {
     grunt.initConfig({
         'gitbook': {
             development: {
-                input: "./",
+                input: "./doc",
                 github: "GitbookIO/javascript"
             }
         },
         'gh-pages': {
             options: {
-                base: '_book'
+                base: 'doc/_book'
             },
             src: ['**']
         },
