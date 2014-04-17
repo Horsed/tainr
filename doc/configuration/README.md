@@ -1,6 +1,6 @@
 # Configuration
 
-The configuration of tainr is done via a ```tainrfile.js``` file that is expected to be located in the current working directory if none is provided via the CLI. To explicitly provide a config file use the ```-c``` option:
+The configuration of tainr is done via a ```tainrfile.js``` that is expected to be located in the current working directory if none is provided via the CLI. To explicitly provide a config file use the ```-c``` option:
 
     $ tainr start -c /path/to/somefile.js
 
@@ -19,30 +19,16 @@ module.exports = {
                                   // false: tainr will connect to a broker
   },
   
-  // the indicators that tainr will start
-  indicators: [
-    {
-      // provide one of the following options:
+  // the indicator/handler drones that tainr will start
+  drones: [
+    {  included: 'heartbeat-indicator',  },
+    {  included: 'heartbeat-handler',  },
 
-      included: 'heartbeat',                  // default indicator
-      local: '/path/to/my-indicator-bin.js',  // local custom indicator
-      npm: 'my-indicator',                    // custom indicator fetched via npm
-      child: true,                            // true: spawn als child process
-                                              // false: require() and instantiate
-    }
-  ],
-
-  // the handlers that tainr will start
-  handlers: [
-    {
-      // provide one of the following options:
-
-      included: 'heartbeat',                // default handler
-      local: '/path/to/my-handler-bin.js',  // local custom handler
-      npm: 'my-handler',                    // custom handler fetched via npm
-      child: true,                          // true: spawn als child process
-                                            // false: require() and instantiate
-    }
+    {  local: '/path/to/my-indicator.js',  },
+    {  local: '/path/to/my-handler.js',  },
+    
+    {  npm: 'my-indicator',  },
+    {  npm: 'my-handler@1.0.1',  },
   ],
 
 };

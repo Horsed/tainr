@@ -9,7 +9,10 @@ var express = require('express')
   , app = express()
   
   , HeartbeatIndicator = require('tainr').Heartbeat
-  , heartbeatIndicator = new Heartbeat({serviceId: 'my-node-app'}); // will periodically emit a heartbeat event;
+  , heartbeatIndicator = new Heartbeat(
+      'tcp://127.0.0.1:6666',
+      'tcp://127.0.0.1:6667',
+      {serviceId: 'my-node-app'});
  
 app.post('/items', function(req, res) {
   res.send([{id: 'item1'}, {id: 'item2'}]);
@@ -19,22 +22,22 @@ app.listen(80);
 console.log('my-node-app is running on port 80...');
 ```
 
-This example REST service uses the *heartbeat indicator* to periodically emit a heartbeat event with the service's identifier. We will now look at a monitoring handler that **runs in another process** and logs the service id whenever it receives a heartbeat event.
+This example REST service uses the **heartbeat indicator** to periodically emit a heartbeat event with the service's identifier. It gets connected to a zeromq xpub/xsub broker running at ```tcp://127.0.0.1:6666, tcp://127.0.0.1:6667```. We will now look at a monitoring handler that **runs in another process** and logs the service id whenever it receives a heartbeat event.
 
 > my-heartbeat-handler.js
 
 ```js
-var Tainr = require('tainr').Tainr
-  , tainr = new Tainr();
+var Drone = require('tainr').Drone
+  , drone = new Drone('tcp://127.0.0.1:6666', 'tcp://127.0.0.1:6667');
   
-tainr.on('heartbeat', function(serviceId) {
+drone.on('heartbeat', function(serviceId) {
   console.log(serviceId);
 });
 
 console.log('my-heartbeat-handler is running...');
 ```
 
-As you can see, tainr is a Node.js [```EventEmitter```](http://nodejs.org/api/events.html#events_class_events_eventemitter) and is used to listen for ```heartbeat``` events that will be emitted by ```my-node-app.js```. Next we'll see how to connect the monitoring event system to the [socket.io](http://socket.io) backend of a simple status page:
+As you can see, this tainr drone is a Node.js [```EventEmitter```](http://nodejs.org/api/events.html#events_class_events_eventemitter) listening for ```heartbeat``` events that will be emitted by ```my-node-app.js```. Next we'll see how to connect the monitoring event system to the [socket.io](http://socket.io) backend of a simple status page:
 
 > my-status-page.js
 
@@ -45,8 +48,8 @@ var express = require('express')
   
   , io = require('socket.io').listen(server)
   
-  , Tainr = require('tainr').Tainr
-  , tainr = new Tainr();
+  , Drone = require('tainr').Drone
+  , drone = new Drone('tcp://127.0.0.1:6666', 'tcp://127.0.0.1:6667');
 
 server.listen(3000);
 console.log('my-status-page is running on port 3000...');
@@ -56,7 +59,7 @@ app.get('/', function (req, res) {
 });
 
 io.sockets.on('connection', function (socket) {
-  tainr.wrap(socket);
+  drone.wrap(socket);
 });
 ```
 

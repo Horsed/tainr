@@ -1,55 +1,33 @@
-# Custom indicators and handlers
+# Custom drones
 
-tainr offers three ways to...
+You can provide your drones as Node.js modules directly from the local filesystem or as npm modules.
 
-## Starting indicators and handlers
+## Writing drones
 
-As you saw in the example config file, tainr can start indicators and handlers for you. They can either be spawned as child processes or by ```require()```ing and instantiating them. In order to instantiate handlers and indicators they have to expose their functionality like this:
-
-```js
-module.exports = function MyIndicator() {
-  // indicator stuff
-};
-```
-
-Local custom indicators and handlers will be instantiated like this: ```require(config.indicators[0].local)```
-
-## Connecting custom indicators and handlers to the tainr pub/sub broker
-
-Here is a custom indicator stub:
+Here is an example drone that both emits and handles a monitoring event:
 
 ```js
 var util = require('util')
-  , Indicator = require('tainr').Indicator;
+  , Drone = require('tainr').Drone;
 
-util.inherits(MyIndicator, Indicator);
+util.inherits(MyDrone, Drone);
 
-function MyIndicator() {
+function MyDrone() {
+  MyDrone.call(this);
+
+  var self = this;
+
+  this.on('my-monitoring-event', function(data) {
+    console.log(data);  // 'some-data'
+  })
 
   setTimeout(function doStuff() {
-
-
-
+    self.emit('my-monitoring-event', 'some data');
   }, 60000);
 
 };
 
-module.exports = MyIndicator;
+module.exports = MyDrone;
 ```
 
-And a custom handler stub:
-
-```js
-var util = require('util')
-  , Handler = require('tainr').Handler;
-
-util.inherits(MyHandler, Handler);
-
-function MyHandler() {
-  // handler stuff
-};
-
-module.exports = MyHandler;
-```
-
-```Indicator``` and ```Handler``` will connect your custom indicator and handler to the tainr pub/sub broker.
+In order for tainr to instantiate drones with ```require()``` they'll have to expose a constructor function. To connect them to the tainr pub/sub broker they have to inherit from ```require('tainr').Drone```. The connection will be done for you.

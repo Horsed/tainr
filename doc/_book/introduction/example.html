@@ -7,8 +7,8 @@
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
-        <meta name="author" content="GitbookIO">
-        <meta name="description" content="*tainr* is ought to be a monitoring service that aims for high customizability. It will enable you to monitor anything from process metrics to business events. You can write your own monitoring indicators and handlers which are basically just Node.js modules that use the same interprocess ```EventEmitter```. Indicators are those parts that test/monitor something and send monitoring events. Handlers will listen for those events and send emails or log something or do whatever you want. tainr will provide a [socket.io](http://socket.io) integration so you can even write handlers that do something **in your frontend**. The underlying messaging is based on [zeromq](http://zeromq.org) so you can connect tainr to your existing zeromq based pub/sub infrastructure. This makes it easy to monitor all events going through your app. You can also let tainr use its own pub/sub infrastructure.">
+        <meta name="author" content="Horsed">
+        <meta name="description" content="[![intro](https://raw.github.com/Horsed/tainr/master/doc/assets/intro-tainr.png)](https://raw.github.com/Horsed/tainr/master/doc/assets/intro-tainr.png)">
         <meta name="keywords" content="gitbook,github" >
         <meta name="generator" content="www.gitbook.io">
 
@@ -24,7 +24,7 @@
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
 
-        <meta property="book:author" content="https://github.com/GitbookIO">
+        <meta property="book:author" content="https://github.com/Horsed">
         <meta property="book:tag" content="GitBook">
 
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -36,11 +36,11 @@
     </head>
     <body>
         
-    <div class="book" data-github="GitbookIO/javascript" data-level="1" data-basepath=".." data-revision="1397734679652">
+    <div class="book" data-github="Horsed/tainr" data-level="1" data-basepath=".." data-revision="1397745357955">
     <div class="book-header">
     <!-- Actions Left -->
     
-    <a href="https://github.com/GitbookIO/javascript" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    <a href="https://github.com/Horsed/tainr" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
     
     <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
     <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
@@ -51,8 +51,8 @@
     <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
 
     
-    <a href="https://github.com/GitbookIO/javascript/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
-    <a href="https://github.com/GitbookIO/javascript/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    <a href="https://github.com/Horsed/tainr/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/Horsed/tainr/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
     
 
     <!-- Title -->
@@ -66,13 +66,13 @@
     <ul class="summary">
         
         <li>
-            <a href="https://github.com/GitbookIO" target="blank">About the author</a>
+            <a href="https://github.com/Horsed" target="blank">About the author</a>
         </li>
         <li>
-            <a href="https://github.com/GitbookIO/javascript/issues" target="blank">Questions and Issues</a>
+            <a href="https://github.com/Horsed/tainr/issues" target="blank">Questions and Issues</a>
         </li>
         <li>
-            <a href="https://github.com/GitbookIO/javascript/edit/master/introduction/example.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/Horsed/tainr/edit/master/introduction/example.md" target="blank">Edit and Contribute</a>
         </li>
         <li class="divider"></li>
         
@@ -143,7 +143,10 @@
   , app = express()
 
   , HeartbeatIndicator = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Heartbeat
-  , heartbeatIndicator = <span class="hljs-keyword">new</span> Heartbeat({serviceId: <span class="hljs-string">'my-node-app'</span>}); <span class="hljs-comment">// will periodically emit a heartbeat event;</span>
+  , heartbeatIndicator = <span class="hljs-keyword">new</span> Heartbeat(
+      <span class="hljs-string">'tcp://127.0.0.1:6666'</span>,
+      <span class="hljs-string">'tcp://127.0.0.1:6667'</span>,
+      {serviceId: <span class="hljs-string">'my-node-app'</span>});
 
 app.post(<span class="hljs-string">'/items'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span> {</span>
   res.send([{id: <span class="hljs-string">'item1'</span>}, {id: <span class="hljs-string">'item2'</span>}]);
@@ -152,20 +155,20 @@ app.post(<span class="hljs-string">'/items'</span>, <span class="hljs-function">
 app.listen(<span class="hljs-number">80</span>);
 console.log(<span class="hljs-string">'my-node-app is running on port 80...'</span>);
 </code></pre>
-<p>This example REST service uses the <em>heartbeat indicator</em> to periodically emit a heartbeat event with the service&#39;s identifier. We will now look at a monitoring handler that <strong>runs in another process</strong> and logs the service id whenever it receives a heartbeat event.</p>
+<p>This example REST service uses the <strong>heartbeat indicator</strong> to periodically emit a heartbeat event with the service&#39;s identifier. It gets connected to a zeromq xpub/xsub broker running at <code>tcp://127.0.0.1:6666, tcp://127.0.0.1:6667</code>. We will now look at a monitoring handler that <strong>runs in another process</strong> and logs the service id whenever it receives a heartbeat event.</p>
 <blockquote>
 <p>my-heartbeat-handler.js</p>
 </blockquote>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> Tainr = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Tainr
-  , tainr = <span class="hljs-keyword">new</span> Tainr();
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> Drone = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Drone
+  , drone = <span class="hljs-keyword">new</span> Drone(<span class="hljs-string">'tcp://127.0.0.1:6666'</span>, <span class="hljs-string">'tcp://127.0.0.1:6667'</span>);
 
-tainr.on(<span class="hljs-string">'heartbeat'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(serviceId)</span> {</span>
+drone.on(<span class="hljs-string">'heartbeat'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(serviceId)</span> {</span>
   console.log(serviceId);
 });
 
 console.log(<span class="hljs-string">'my-heartbeat-handler is running...'</span>);
 </code></pre>
-<p>As you can see, tainr is a Node.js <a href="http://nodejs.org/api/events.html#events_class_events_eventemitter" target="_blank"><code>EventEmitter</code></a> and is used to listen for <code>heartbeat</code> events that will be emitted by <code>my-node-app.js</code>. Next we&#39;ll see how to connect the monitoring event system to the <a href="http://socket.io/" target="_blank">socket.io</a> backend of a simple status page:</p>
+<p>As you can see, this tainr drone is a Node.js <a href="http://nodejs.org/api/events.html#events_class_events_eventemitter" target="_blank"><code>EventEmitter</code></a> listening for <code>heartbeat</code> events that will be emitted by <code>my-node-app.js</code>. Next we&#39;ll see how to connect the monitoring event system to the <a href="http://socket.io/" target="_blank">socket.io</a> backend of a simple status page:</p>
 <blockquote>
 <p>my-status-page.js</p>
 </blockquote>
@@ -175,8 +178,8 @@ console.log(<span class="hljs-string">'my-heartbeat-handler is running...'</span
 
   , io = <span class="hljs-built_in">require</span>(<span class="hljs-string">'socket.io'</span>).listen(server)
 
-  , Tainr = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Tainr
-  , tainr = <span class="hljs-keyword">new</span> Tainr();
+  , Drone = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Drone
+  , drone = <span class="hljs-keyword">new</span> Drone(<span class="hljs-string">'tcp://127.0.0.1:6666'</span>, <span class="hljs-string">'tcp://127.0.0.1:6667'</span>);
 
 server.listen(<span class="hljs-number">3000</span>);
 console.log(<span class="hljs-string">'my-status-page is running on port 3000...'</span>);
@@ -186,7 +189,7 @@ app.get(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span 
 });
 
 io.sockets.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(socket)</span> {</span>
-  tainr.wrap(socket);
+  drone.wrap(socket);
 });
 </code></pre>
 <p>In this example <a href="http://expressjs.com/" target="_blank">express</a> app, we&#39;re connecting the socket.io socket to the tainr <code>EventEmitter</code>. That means, all monitoring events emitted through tainr will be automagically emitted with this socket.io socket. Now we can write a monitoring handler for the browser:</p>
