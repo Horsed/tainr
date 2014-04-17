@@ -8,7 +8,7 @@
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
         <meta name="author" content="Horsed">
-        <meta name="description" content="*tainr* is ought to be a monitoring service that aims for high customizability. It will enable you to monitor anything from process metrics to business events. You can write your own monitoring indicators and handlers which are basically just Node.js modules that use the same interprocess ```EventEmitter```. Indicators are those parts that test/monitor something and send monitoring events. Handlers will listen for those events and send emails or log something or do whatever you want. tainr will provide a [socket.io](http://socket.io) integration so you can even write handlers that do something **in your frontend**. The underlying messaging is based on [zeromq](http://zeromq.org) so you can connect tainr to your existing zeromq based pub/sub infrastructure. This makes it easy to monitor all events going through your app. You can also let tainr use its own pub/sub infrastructure.">
+        <meta name="description" content="[![intro](https://raw.github.com/Horsed/tainr/master/doc/assets/intro-tainr.png)](https://raw.github.com/Horsed/tainr/master/doc/assets/intro-tainr.png)">
         <meta name="keywords" content="gitbook,github" >
         <meta name="generator" content="www.gitbook.io">
 
@@ -34,7 +34,7 @@
     </head>
     <body>
         
-    <div class="book" data-github="Horsed/tainr" data-level="3" data-basepath=".." data-revision="1397734938726">
+    <div class="book" data-github="Horsed/tainr" data-level="3" data-basepath=".." data-revision="1397746054218">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -130,49 +130,37 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_2">
+                    <section class="normal" id="section-gitbook_3">
                     
-                        <h1 id="custom-indicators-and-handlers">Custom indicators and handlers</h1>
-<p>tainr offers three ways to...</p>
-<h2 id="starting-indicators-and-handlers">Starting indicators and handlers</h2>
-<p>As you saw in the example config file, tainr can start indicators and handlers for you. They can either be spawned as child processes or by <code>require()</code>ing and instantiating them. In order to instantiate handlers and indicators they have to expose their functionality like this:</p>
-<pre><code class="lang-js">module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyIndicator</span><span class="hljs-params">()</span> {</span>
-  <span class="hljs-comment">// indicator stuff</span>
-};
-</code></pre>
-<p>Local custom indicators and handlers will be instantiated like this: <code>require(config.indicators[0].local)</code></p>
-<h2 id="connecting-custom-indicators-and-handlers-to-the-tainr-pub-sub-broker">Connecting custom indicators and handlers to the tainr pub/sub broker</h2>
-<p>Here is a custom indicator stub:</p>
+                        <h1 id="custom-drones">Custom drones</h1>
+<p>You can provide your drones as Node.js modules directly from the local filesystem or as npm modules.</p>
+<h2 id="writing-drones">Writing drones</h2>
+<p>Here is an example drone that both emits and handles a monitoring event:</p>
 <pre><code class="lang-js"><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
-  , Indicator = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Indicator;
+  , Drone = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Drone;
 
-util.inherits(MyIndicator, Indicator);
+util.inherits(MyDrone, Drone);
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyIndicator</span><span class="hljs-params">()</span> {</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyDrone</span><span class="hljs-params">()</span> {</span>
+  MyDrone.call(<span class="hljs-keyword">this</span>);
+
+  <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+
+  <span class="hljs-keyword">this</span>.on(<span class="hljs-string">'my-monitoring-event'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
+    console.log(data);  <span class="hljs-comment">// 'some-data'</span>
+  })
 
   setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span><span class="hljs-params">()</span> {</span>
-
-
-
+    self.emit(<span class="hljs-string">'my-monitoring-event'</span>, <span class="hljs-string">'some data'</span>);
   }, <span class="hljs-number">60000</span>);
 
 };
 
-module.exports = MyIndicator;
+module.exports = MyDrone;
 </code></pre>
-<p>And a custom handler stub:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
-  , Handler = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tainr'</span>).Handler;
-
-util.inherits(MyHandler, Handler);
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyHandler</span><span class="hljs-params">()</span> {</span>
-  <span class="hljs-comment">// handler stuff</span>
-};
-
-module.exports = MyHandler;
-</code></pre>
-<p><code>Indicator</code> and <code>Handler</code> will connect your custom indicator and handler to the tainr pub/sub broker.</p>
+<p>In order for tainr to instantiate drones with <code>require()</code>, they&#39;ll have to expose a constructor function. To automatically connect them to the zeromq xpub/xsub broker they have to inherit from <code>require(&#39;tainr&#39;).Drone</code>.</p>
+<h2 id="drones-not-ran-by-tainr">Drones not ran by tainr</h2>
+<p>To connect drones to the tainr service, they have to be provided with the socket addresses of a zeromq xpub/xsub broker.</p>
 
                     
                     </section>
