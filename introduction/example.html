@@ -7,7 +7,7 @@
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="robots" content="index, follow">
-        <meta name="author" content="GitbookIO">
+        <meta name="author" content="Horsed">
         <meta name="description" content="*tainr* is ought to be a monitoring service that aims for high customizability. It will enable you to monitor anything from process metrics to business events. You can write your own monitoring indicators and handlers which are basically just Node.js modules that use the same interprocess ```EventEmitter```. Indicators are those parts that test/monitor something and send monitoring events. Handlers will listen for those events and send emails or log something or do whatever you want. tainr will provide a [socket.io](http://socket.io) integration so you can even write handlers that do something **in your frontend**. The underlying messaging is based on [zeromq](http://zeromq.org) so you can connect tainr to your existing zeromq based pub/sub infrastructure. This makes it easy to monitor all events going through your app. You can also let tainr use its own pub/sub infrastructure.">
         <meta name="keywords" content="gitbook,github" >
         <meta name="generator" content="www.gitbook.io">
@@ -24,7 +24,7 @@
         <meta property="og:type" content="book">
         <meta property="og:locale" content="en_US">
 
-        <meta property="book:author" content="https://github.com/GitbookIO">
+        <meta property="book:author" content="https://github.com/Horsed">
         <meta property="book:tag" content="GitBook">
 
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -36,11 +36,11 @@
     </head>
     <body>
         
-    <div class="book" data-github="GitbookIO/javascript" data-level="1" data-basepath=".." data-revision="1397734679652">
+    <div class="book" data-github="Horsed/tainr" data-level="1" data-basepath=".." data-revision="1397734908235">
     <div class="book-header">
     <!-- Actions Left -->
     
-    <a href="https://github.com/GitbookIO/javascript" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    <a href="https://github.com/Horsed/tainr" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
     
     <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
     <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
@@ -51,8 +51,8 @@
     <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
 
     
-    <a href="https://github.com/GitbookIO/javascript/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
-    <a href="https://github.com/GitbookIO/javascript/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    <a href="https://github.com/Horsed/tainr/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/Horsed/tainr/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
     
 
     <!-- Title -->
@@ -66,13 +66,13 @@
     <ul class="summary">
         
         <li>
-            <a href="https://github.com/GitbookIO" target="blank">About the author</a>
+            <a href="https://github.com/Horsed" target="blank">About the author</a>
         </li>
         <li>
-            <a href="https://github.com/GitbookIO/javascript/issues" target="blank">Questions and Issues</a>
+            <a href="https://github.com/Horsed/tainr/issues" target="blank">Questions and Issues</a>
         </li>
         <li>
-            <a href="https://github.com/GitbookIO/javascript/edit/master/introduction/example.md" target="blank">Edit and Contribute</a>
+            <a href="https://github.com/Horsed/tainr/edit/master/introduction/example.md" target="blank">Edit and Contribute</a>
         </li>
         <li class="divider"></li>
         
@@ -132,7 +132,7 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_4">
+                    <section class="normal" id="section-gitbook_3">
                     
                         <h1 id="example">Example</h1>
 <p>Suppose you&#39;ve got a Node.js app or service that runs in it&#39;s own process and you want to monitor some process information like the CPU usage. There are tools for this like <a href="https://github.com/Unitech/pm2" target="_blank">pm2</a>. But suppose you want to monitor some business events that occur in your app/service and you want to send an email and pop up an alert in another app. Let&#39;s first setup this Node.js service:</p>
