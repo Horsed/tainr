@@ -34,7 +34,7 @@
     </head>
     <body>
         
-    <div class="book" data-github="Horsed/tainr" data-level="3" data-basepath=".." data-revision="1397745357955">
+    <div class="book" data-github="Horsed/tainr" data-level="3" data-basepath=".." data-revision="1397745887926">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -158,7 +158,9 @@ util.inherits(MyDrone, Drone);
 
 module.exports = MyDrone;
 </code></pre>
-<p>In order for tainr to instantiate drones with <code>require()</code> they&#39;ll have to expose a constructor function. To connect them to the tainr pub/sub broker they have to inherit from <code>require(&#39;tainr&#39;).Drone</code>. The connection will be done for you.</p>
+<p>In order for tainr to instantiate drones with <code>require()</code>, they&#39;ll have to expose a constructor function. To automatically connect them to the zeromq xpub/xsub broker they have to inherit from <code>require(&#39;tainr&#39;).Drone</code>.</p>
+<h2 id="drones-not-ran-by-tainr">Drones not ran by tainr</h2>
+<p>To connect drones to the tainr service, they have to be provided with the socket addresses of a zeromq xpub/xsub broker.</p>
 
                     
                     </section>
