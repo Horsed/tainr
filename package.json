@@ -17,9 +17,23 @@
   },
   "homepage": "https://github.com/Horsed/tainr",
   "dependencies": {
+    "zmq": "2.5.1",
+    "zmq-toolkit": "0.0.4",
+    "lodash": "2.4.1",
+    "commander": "2.2.0",
+    "socket.io": "~0.9.16",
+    "q": "1.0.1"
+  },
+  "devDependencies": {
     "grunt-contrib-clean": "~0.5.0",
     "grunt": "~0.4.4",
     "grunt-gh-pages": "~0.9.1",
-    "grunt-gitbook": "~0.2.0"
+    "grunt-gitbook": "~0.2.0",
+    "should": "~2.1.0",
+    "chai": "~1.9.0",
+    "sinon-chai": "~2.5.0",
+    "sinon": "~1.8.2",
+    "grunt-mocha-test": "~0.10.2",
+    "grunt-contrib-watch": "~0.6.1"
   }
 }

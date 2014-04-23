@@ -3,7 +3,7 @@ tainr
 
 [![intro](https://raw.github.com/Horsed/tainr/master/doc/assets/intro-tainr.png)](https://raw.github.com/Horsed/tainr/master/doc/assets/intro-tainr.png)
 
-*tainr* is ought to be an event-based Node.js monitoring service that aims for high customizability. It will enable you to monitor anything that you can code in JavaScript.
+*tainr* will be an event-based hackable Node.js monitoring toolkit that aims for high customizability. It will enable you to monitor anything that you can code in JavaScript.
 
 Write your own monitoring indicators and handlers (called drones) and connect them to the tainr service. Indicator drones test/monitor something and send monitoring events. Handler drones will listen for those events and send emails or log something or do whatever you want.
 
